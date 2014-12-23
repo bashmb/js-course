@@ -14,3 +14,15 @@ var resetBoard = function () {
 
   currentPlayer = 'wht'
 };
+
+var makeMove = function(row1, col1, row2, col2) {
+  board[charToNum[row1]][col1] = " X "
+  board[charToNum[row2]][col2] = currentPlayer
+  if(currentPlayer === "red"){
+    currentPlayer = "wht"}
+  else
+  {
+    currentPlayer = "red"
+  }
+  displayBoard()
+}
