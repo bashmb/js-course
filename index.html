@@ -6,6 +6,13 @@
     <link rel="stylesheet" type="text/css" href="./css/app.css">
   </head>
   <body>
+  c,1,d,2
+  <br>
+  f,4,e,3
+  <br>
+  d,2,f,4
+  <br>
+
     <span class="row row-a">
       <span class="col col-0 empty"></span>
       <span class="col col-1"></span>
@@ -93,9 +100,11 @@
       <span class="col col-6"></span>
       <span class="col col-7 empty"></span>
     </span>
-    <br>
-    <br>
+    <br>            
 
+    <br>
+    <span id='turnIndicator'></span>
+    <br>
     <button class="start" id='startGame'>Start the game</button>
   </body>
 
@@ -105,4 +114,7 @@
     }
     )
   </script>    
+  <script type='text/javascript'>
+    $("#turnIndicator").text(function() {getPlayer()})
+    </script>
 </html>
