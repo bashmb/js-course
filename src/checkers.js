@@ -16,6 +16,10 @@ var resetBoard = function () {
   getPlayer(currentPlayer)
 };
 
+var kathryn = function(question) {
+  return "You're rong."
+}
+
 var makeMove = function(moveObj, taking) {
   // Test whether a piece will be taken
 
