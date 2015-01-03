@@ -18,35 +18,41 @@ var resetBoard = function () {
 
 
 var makeMove = function(moveObj, taking) {
-  // Test whether a piece will be taken
-
-
+  //Make move; update board display
   board[charToNum[moveObj['r1']]][moveObj['c1']] = " X "
   board[charToNum[moveObj['r2']]][moveObj['c2']] = currentPlayer
-  
-
-
-
-  //Change turn
-  if(currentPlayer === "red"){
-    currentPlayer = "wht"}
-  else
-  {
-    currentPlayer = "red"
-  }
-
+  //remove piece if necessary
   if(moveObj['rCap'] !== -1){
     removePiece(moveObj)
   }
+ 
+  //Change active player
+  if(currentPlayer === "red"){
+    currentPlayer = "wht"}
+  else
+    {
+      currentPlayer = "red"
+    }
+
+
   displayBoard()
   getMove()
   
 }
 
 var removePiece = function(moveObj){
-    board[charToNum[moveObj['r2']]][moveObj['c2']] = " X "
+    // board[charToNum[moveObj['r2']]][moveObj['c2']] = " X "
+    alert("you took a piece")
+      board[charToNum[moveObj['rCap']]][moveObj['cCap']] = " Z "
+    
+  //Change active player
+  if(currentPlayer === "red"){
+    currentPlayer = "wht"}
+  else
+    {
+      currentPlayer = "red"
+    }
 
-      board[charToNum[moveObj['rCap']]][moveObj['cCap']] = " X "
     displayBoard()
     getMove()
 }
@@ -67,10 +73,10 @@ var attemptMove = function(moveObj){
   // test not moving off the board
  
   // test not moving opponent's piece
-  if(board[charToNum[moveObj['r1']]][moveObj['c1']] != currentPlayer){
-    errorCount += 1 
-    alert("It's not your turn.")
-  }
+  // if(board[charToNum[moveObj['r1']]][moveObj['c1']] != currentPlayer){
+  //   errorCount += 1 
+  //   alert("It's not your turn.")
+  // }
 
   // test valid capture
     //determine whether enemy piece is between start and end spaces using Math.abs
@@ -96,11 +102,14 @@ var getMove = function(){
   var movePrompt = prompt("Please enter your move in format: R1, C1, R2, C2")
   var moveArray = movePrompt.split(",")
   var moveObj = {r1: moveArray[0], c1: moveArray[1], r2: moveArray[2], c2: moveArray[3], rCap: -1, cCap: -1}
-  if(moveObj['c2'] - moveObj['c1'] == 2){
-  var capturedRow = Math.abs(charToNum[moveObj['r1']]-charToNum[moveObj['r1']])
-  var capturedCol = Math.abs(moveObj['c1']-moveObj['c2'])
-      moveObj['rCap'] = capturedRow
-      moveObj['cCap'] = capturedCol
+  if(Math.abs(moveObj['c2'] - moveObj['c1']) == 2){
+    currentPlayer = 'red' ? moveObj['rCap'] = charToNum[moveObj['r2']]*1 - 1 : moveObj['rCap'] = charToNum[moveObj['r2']]*1 + 1
+    moveObj['c2'] - moveObj['c1'] > 0 ? moveObj['cCap'] = moveObj['c1']*1 + 1 : moveObj['cCap'] = moveObj['c1']*1 - 1
+    
+    // var capturedRow = Math.abs(charToNum[moveObj['r1']]-charToNum[moveObj['r1']])
+    // var capturedCol = Math.abs(moveObj['c1']-moveObj['c2'])
+    //     moveObj['rCap'] = capturedRow
+    //     moveObj['cCap'] = capturedCol
   }
   console.log(moveObj)
   attemptMove(moveObj)
